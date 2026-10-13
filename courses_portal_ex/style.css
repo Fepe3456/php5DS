@@ -1,0 +1,202 @@
+/* ===== GENERAL ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* ===== MAIN TITLE ===== */
+
+h1 {
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 28px 32px;
+    color: white;
+    background: linear-gradient(135deg, #172554, #2563eb);
+    border-radius: 18px;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 750;
+    letter-spacing: -1px;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+}
+
+h2 {
+    margin-top: 0;
+    color: #172554;
+    font-size: 1.35rem;
+}
+
+h3 {
+    color: #2563eb;
+}
+
+/* ===== THREE COLUMNS ===== */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 24px;
+
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== CARDS ===== */
+
+.part_ex {
+    min-width: 0;
+    padding: 26px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.part_ex:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+/* ===== TEXT AND FORMS ===== */
+
+p {
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    font: inherit;
+    color: #1e293b;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* ===== BUTTONS ===== */
+
+button {
+    padding: 12px 18px;
+    font: inherit;
+    font-weight: 600;
+    color: #ffffff;
+    background: #2563eb;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.2s ease,
+                transform 0.2s ease;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* ===== COURSE RESULTS ===== */
+
+.part_ex hr {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 18px 0;
+}
+
+.part_ex h3 {
+    overflow-wrap: anywhere;
+}
+
+/* ===== TOTAL HOURS ===== */
+
+#div_total {
+    background: linear-gradient(145deg, #ffffff, #eff6ff);
+    border-color: #bfdbfe;
+}
+
+#div_total h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+/* ===== RESPONSIVE LAYOUT ===== */
+
+@media (max-width: 950px) {
+    .container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #div_total {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 20px 14px;
+    }
+
+    h1 {
+        padding: 22px;
+        margin-bottom: 22px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #div_total {
+        grid-column: auto;
+    }
+
+    .part_ex {
+        padding: 22px;
+    }
+}
