@@ -1,0 +1,85 @@
+
+/* Stile generale */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 30px;
+}
+
+/* Titoli */
+h1 {
+    text-align: center;
+    color: #234a78;
+    margin-bottom: 25px;
+}
+
+/* Tabella */
+#table_esiti {
+    width: 80%;
+    margin: 0 auto 35px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+/* Celle e intestazioni */
+#table_esiti th,
+#table_esiti td {
+    padding: 14px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Intestazione */
+#table_esiti th {
+    background-color: #234a78;
+    color: white;
+    text-transform: uppercase;
+}
+
+/* Righe alternate */
+#table_esiti tr:nth-child(even) {
+    background-color: #edf3fa;
+}
+
+/* Effetto al passaggio del mouse */
+#table_esiti tr:hover {
+    background-color: #d6e6f7;
+}
+
+/* Sezione statistiche */
+body > p {
+    width: 70%;
+    max-width: 500px;
+    margin: 12px auto;
+    padding: 15px;
+    background-color: white;
+    border-left: 5px solid #234a78;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+}
+
+/* Adattamento agli schermi piccoli */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    #table_esiti {
+        width: 100%;
+    }
+
+    #table_esiti th,
+    #table_esiti td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    body > p {
+        width: auto;
+    }
+}
