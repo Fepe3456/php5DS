@@ -1,0 +1,119 @@
+
+/* ===== STILE GENERALE ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f6fa;
+    color: #263445;
+    margin: 0;
+    padding: 30px 20px;
+    line-height: 1.6;
+}
+
+/* ===== TITOLI ===== */
+h1 {
+    color: #234a78;
+    text-align: center;
+    margin: 30px 0 20px;
+}
+
+h2 {
+    color: #234a78;
+    text-align: center;
+    margin-top: 35px;
+}
+
+/* ===== TABELLE ===== */
+#table_esiti,
+#table_studenti_filtrati {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto 35px;
+    border-collapse: collapse;
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Celle */
+#table_esiti th,
+#table_esiti td,
+#table_studenti_filtrati th,
+#table_studenti_filtrati td {
+    padding: 13px 16px;
+    text-align: center;
+    border-bottom: 1px solid #e1e7ef;
+}
+
+/* Intestazioni */
+#table_esiti th,
+#table_studenti_filtrati th {
+    background-color: #234a78;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* Righe alternate */
+#table_esiti tr:nth-child(even),
+#table_studenti_filtrati tr:nth-child(even) {
+    background-color: #edf3fa;
+}
+
+/* Passaggio del mouse */
+#table_esiti tbody tr:hover,
+#table_studenti_filtrati tbody tr:hover,
+#table_esiti tr:hover,
+#table_studenti_filtrati tr:hover {
+    background-color: #d9e8f8;
+}
+
+/* ===== STATISTICHE ===== */
+body > p {
+    max-width: 600px;
+    margin: 12px auto;
+    padding: 14px 18px;
+    background-color: white;
+    border-left: 5px solid #3676b8;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #234a78;
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* ===== SCHERMI PICCOLI ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 12px 8px;
+    }
+
+    #table_esiti,
+    #table_studenti_filtrati {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    #table_esiti th,
+    #table_esiti td,
+    #table_studenti_filtrati th,
+    #table_studenti_filtrati td {
+        padding: 9px 5px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
