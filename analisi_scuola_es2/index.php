@@ -38,7 +38,24 @@ require_once 'funzioni.php';
     </table> <!-- Devo chiudere la tabella, perché in headers.php non l'ho chiusa, ho solamente iniziato con le intestazioni -->
 
 
-    <h1>Studenti 5A</h1>
+    <form action="" method="GET">
+        <p>Seleziona la classe: 
+            <select name="menu_classi" id="">
+                <option value="5A">5A</option>
+                <option value="5B">5B</option>
+                <option value="5C">5C</option>
+            </select>
+            <button type="submit">SELECT</button>
+        </p>
+    </form>
+
+    <?php
+        if( $_SERVER["REQUEST_METHOD"] === "GET"){
+            $input_classe = $_GET["menu_classi"]; 
+        }
+    ?>
+
+    <h1>Studenti <?php echo $input_classe?></h1>
     <table id="table_studenti_filtrati" border="1">
         <tr>
             <th>Nome</th>
@@ -48,7 +65,7 @@ require_once 'funzioni.php';
         </tr>
 
         <?php
-            $studenti_filtrati = filtraPerClasse($studenti, "5A");
+            $studenti_filtrati = filtraPerClasse($studenti, $input_classe);
             //var_dump($studenti_filtrati); 
             foreach($studenti_filtrati as [$nome, $classe, $voto]){
                 $esito = verificaEsito($voto); 
