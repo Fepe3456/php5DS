@@ -11,6 +11,7 @@ require_once "funzioni.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prenotazione Laboratorio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -35,24 +36,75 @@ require_once "funzioni.php";
             </select>
         </p>
         <p>Data: <input type="date" name="data" required> </p>
-        <p>Orario di inizio: <input type="time" name="orario"> </p>
-        <p>Durata: <input type="number" name="durata"> </p>
+        <p>Orario di inizio: <input type="time" name="orario_inizio"> </p>
+        <p>Durata (in ore): <input type="number" name="durata"> </p>
         <p>Numero studenti: <input type="number" name="numero_studenti"> </p>
         <p>Tipo di attività: <input type="text" name="tipo_att"> </p>
-        <button type="submit">PRENOTA</button>
+        <button type="submit" name="prenotazione_btn">PRENOTA</button>
     </form>
 
     <?php
-        /*$data_fine = date("2026-10-25"); 
-        echo calcolaGiorniMancanti($data_fine); 
-        */
+        $form_data = date("Y-m-d"); //Inizializzo la data ad oggi 
+        //Variabili del form 
+        if( $_SERVER["REQUEST_METHOD"] === "POST" ){
+            $form_nome = $_POST["nome"]; 
+            $form_classe = $_POST["select_classi"]; 
+            $form_laboratori = $_POST["select_laboratori"]; 
+            $form_data = $_POST["data"]; 
+            $form_orario_inizio = $_POST["orario_inizio"]; 
+            $form_durata = $_POST["durata"]; 
+            $form_n_studenti = $_POST["numero_studenti"]; 
+            $form_tipo_att = $_POST["tipo_att"]; 
+        }
+    ?>
+
+    <?php
+        if( $_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["prenotazione_btn"]) ){
+            //Calcolo / Verifica informazioni tramite le funzioni 
+            $orario_fine = calcolaOrarioFine($form_orario_inizio, $form_durata); 
+            $gg_mancanti = calcolaGiorniMancanti($form_data);
+            $disp_oraria = verificaDisponibilitaOraria($form_orario_inizio, $orario_fine); 
+            $verifica_capienza = verificaCapienza($form_n_studenti, $form_laboratori, $laboratori); 
+            $caratteristiche_lab = trovaLaboratorio($form_laboratori, $laboratori); 
+
+            //Creazione HTML 
+            echo "
+            <div id=\"riepilogo\">
+                <p>Nome docente: {$form_nome}</p>
+                <p>Classe: {$form_classe}</p>
+                <p>Laboratorio: {$form_laboratori}</p>
+                <p>Data: {$form_data}</p>
+                <p>Orario di inizio: {$form_orario_inizio}</p>
+                <p>Orario di fine: {$orario_fine}</p>
+                <p>Durata: {$form_durata} ore</p>
+                <p>Numero di studenti presenti: {$form_n_studenti} studenti</p>
+                <p>Tipo di attività: {$form_tipo_att}</p>
+                <br>
+                <p>Caratteristiche laboratorio: {$caratteristiche_lab}</p>
+                <br>
+                <p>Disponibilità oraria: {$disp_oraria}</p>
+                <p>Verifica capienza: {$verifica_capienza}</p>
+                <p>Giorni mancanti: {$gg_mancanti}</p>
+            </div>
+            "; 
+        }
+    ?>
+
+    <!---<?php
+        echo calcolaGiorniMancanti($form_data); 
 
         $l = $laboratori[0]; 
         echo trovaLaboratorio($l, $laboratori); 
 
         $c = $classi[0]; 
         echo verificaCapienza($c, $l); 
+
+        $orario_fine = calcolaOrarioFine($form_orario_inizio, $form_durata); 
+        echo $orario_fine; 
+
+        echo verificaDisponibilitaOraria($form_orario_inizio, $orario_fine); 
     ?>
+    -->
     
 </body>
 </html>

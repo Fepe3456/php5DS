@@ -10,28 +10,48 @@ function generaOptionNome($array){
 
 function calcolaGiorniMancanti($data_fine){
     $oggi = date("Y-m-d"); 
-    $gg_mancanti = $data_fine.getDay() - $oggi.getDay(); 
-    return $gg_mancanti;
+    $gg_mancanti = ( strtotime($data_fine) - strtotime($oggi) ) / 86400; 
+    //Perché 86400? È il numero di secondi in un giorno: 24ore * 60minuti * 60secondi = 86400 
+    return $gg_mancanti; 
 }
 
+//strtotime() converte la data in numero di secondi passati dal 1° gennaio 1970 
 
 function calcolaOrarioFine($orario_inizio, $durata){
-    $orario_fine = time();
+    $orario_fine = date("H:i",  (strtotime($orario_inizio) + $durata*3600) );
     return $orario_fine; 
 }
 
-function trovaLaboratorio($lab, $laboratori){
+function trovaLaboratorio($nome_lab, $laboratori){
+    $str = "";
     foreach($laboratori as $element){
-        if( $element == $lab ){
-            echo "<br>Nome: {$element["nome"]}     Capienza: {$element["capienza"]}"; 
+        if( $element["nome"] == $nome_lab ){
+            $str .= "<br>Nome: {$element["nome"]}     Capienza: {$element["capienza"]}"; 
         }
     }
+    return $str; 
 }
 
-function verificaCapienza($cl, $lab){
+function verificaCapienza($n_studenti, $lab, $laboratori){
     $str = "Il laboratorio ha abbastanza posti per la classe"; 
-    if( $cl["capienza"] > $lab["capienza"] ){
-        $str = "Troppi studenti nel laboratorio"; 
+    foreach($laboratori as $element){
+        if( $element["nome"] == $lab ){
+            if( $n_studenti > $element["capienza"] ){
+                $str = "Troppi studenti nel laboratorio"; 
+            }
+        }
+    }
+    return $str; 
+}
+
+function verificaDisponibilitaOraria($orario_inizio, $orario_fine){
+    $str = "Disponibile"; 
+    $start = strtotime($orario_inizio);
+    $end = strtotime($orario_fine); 
+    $min = strtotime("08:00");
+    $max = strtotime("17:00"); 
+    if( $start < $min || $end > $max ){
+        $str = "Non disponibile"; 
     }
     return $str; 
 }
