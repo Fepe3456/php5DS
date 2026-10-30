@@ -37,7 +37,7 @@ function eliminaSessione(){
             }
         }
         else{
-            echo "<p>Nessuna risposta fornita!</p>";
+            echo "<p style=\"margin: 0 auto; border-radius: 20px; width: 20%; text-align: center; background-color: white; padding: 10px;\">Nessuna risposta fornita!</p>";
         }
     
     ?>
