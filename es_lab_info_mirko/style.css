@@ -1,0 +1,463 @@
+/* ==========================================
+   1. VARIABILI COLORE E RESET
+   ========================================== */
+:root {
+    --bg-page: #f7f5fa;
+    --text-primary: #2b213a;
+    --text-muted: #786c8c;
+
+    --purple-primary: #6c5ce7;
+    --purple-hover: #5f27cd;
+    --purple-dark: #1e152a;
+    --purple-table-header: #341f97;
+    --purple-light: #f0edfd;
+    --purple-border: #e2dcfa;
+
+    --card-bg: #ffffff;
+    --shadow-purple: rgba(108, 92, 231, 0.08);
+
+    --success: #10ac84;
+    --danger: #ee5253;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 35px 20px;
+}
+
+/* Titolo principale della pagina (h1 direttamente nel body) */
+body > h1 {
+    font-size: 1.8rem;
+    color: var(--purple-dark);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* ==========================================
+   2. FORM DI PRENOTAZIONE (index.php)
+   ========================================== */
+form {
+    width: 100%;
+    max-width: 680px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--purple-border);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px var(--shadow-purple);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Ogni gruppo di campi sta su una riga */
+form div {
+    display: flex;
+    gap: 12px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    border: 1px solid var(--purple-border);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--purple-primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    background-color: var(--card-bg);
+}
+
+::placeholder {
+    color: var(--text-muted);
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* Riga con i campi uno sotto l'altro (studenti e attività) */
+form div.colonna {
+    flex-direction: column;
+}
+
+/* Le due select della classe (1-5 e A-I) sono strette */
+#select1,
+#select2 {
+    width: 80px;
+    text-align: center;
+}
+
+button {
+    padding: 14px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--purple-primary);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--purple-hover);
+    transform: translateY(-2px);
+}
+
+/* Bottone "Vedi Prenotazioni": link con aspetto secondario (solo bordo) */
+.btn-secondario {
+    padding: 14px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--purple-primary);
+    background-color: transparent;
+    border: 2px solid var(--purple-primary);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-secondario:hover {
+    background-color: var(--purple-primary);
+    color: #ffffff;
+}
+
+/* ==========================================
+   2b. PAGINA PRENOTAZIONI (prenotazioni.php)
+   ========================================== */
+.pagina {
+    width: 100%;
+    max-width: 1200px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--purple-border);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px var(--shadow-purple);
+    padding: 32px;
+}
+
+.pagina h2 {
+    margin-bottom: 18px;
+}
+
+.pagina h3 {
+    margin: 18px 0 8px;
+    color: var(--purple-dark);
+}
+
+.pagina ul {
+    list-style: none;
+    background-color: var(--bg-page);
+    border: 1px solid var(--purple-border);
+    border-radius: 8px;
+    padding: 16px 20px;
+}
+
+.pagina li {
+    padding: 4px 0;
+}
+
+.pagina hr {
+    border: none;
+    border-top: 2px solid var(--purple-light);
+    margin: 28px 0;
+}
+
+.pagina p {
+    margin-bottom: 18px;
+}
+
+.pagina .btn-secondario {
+    display: block;
+}
+
+/* Messaggio di esito (successo o errore) */
+.messaggio {
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid;
+}
+
+.messaggio.successo {
+    color: var(--success);
+    background-color: #e8f8f3;
+    border-color: var(--success);
+}
+
+.messaggio.errore {
+    color: var(--danger);
+    background-color: #fdeeee;
+    border-color: var(--danger);
+}
+
+/* ==========================================
+   3. HEADER E NAVIGAZIONE
+   ========================================== */
+.main-header {
+    background-color: #ffffff;
+    border-bottom: 2px solid var(--purple-light);
+    box-shadow: 0 4px 15px var(--shadow-purple);
+    padding: 16px 0;
+}
+
+.header-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.4rem;
+    color: var(--purple-dark);
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--purple-primary);
+}
+
+.header-info .date {
+    font-size: 0.85rem;
+    color: var(--purple-primary);
+    background-color: var(--purple-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   4. CONTENUTO PRINCIPALE
+   ========================================== */
+.content-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 35px auto;
+    padding: 0 20px;
+    flex: 1;
+}
+
+h2 {
+    color: var(--purple-dark);
+    margin-bottom: 22px;
+    font-size: 1.6rem;
+}
+
+/* ==========================================
+   5. TABELLA RISULTATI
+   ========================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px var(--shadow-purple);
+    margin-bottom: 30px;
+    border: 1px solid var(--purple-border);
+}
+
+/* Intestazione: colorata sui th, così funziona anche senza <thead> */
+table th {
+    background-color: var(--purple-table-header);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+table th,
+table td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+table tr {
+    border-bottom: 1px solid var(--purple-border);
+    transition: background-color 0.2s ease;
+}
+
+table tr:last-child {
+    border-bottom: none;
+}
+
+table tr:hover td {
+    background-color: var(--purple-light);
+}
+
+/* ==========================================
+   6. CARD STATISTICHE
+   ========================================== */
+.stats-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 6px 18px var(--shadow-purple);
+    border: 1px solid var(--purple-border);
+}
+
+.stats-title {
+    font-size: 1.2rem;
+    color: var(--purple-dark);
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--purple-light);
+    padding-bottom: 8px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.stat-item {
+    background-color: var(--bg-page);
+    padding: 18px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--purple-border);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: var(--purple-primary);
+}
+
+.stat-value.green {
+    color: var(--success);
+}
+
+.stat-value.red {
+    color: var(--danger);
+}
+
+/* ==========================================
+   7. FOOTER
+   ========================================== */
+.main-footer {
+    background-color: var(--purple-dark);
+    color: #ffffff;
+    padding: 22px 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-info p {
+    font-size: 0.85rem;
+    color: #c8c0d8;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #c8c0d8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--purple-primary);
+}
+
+/* ==========================================
+   8. RESPONSIVE DESIGN (MOBILE)
+   ========================================== */
+@media (max-width: 768px) {
+    form {
+        padding: 22px;
+    }
+
+    /* Le righe del form vanno una sotto l'altra */
+    form div {
+        flex-direction: column;
+    }
+
+    #select1,
+    #select2 {
+        width: 100%;
+    }
+
+    .header-container,
+    .footer-container {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .nav-menu ul {
+        gap: 15px;
+    }
+
+    table th,
+    table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
