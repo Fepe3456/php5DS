@@ -1,0 +1,161 @@
+
+/* Impostazioni generali */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    color: #1e293b;
+}
+
+/* Contenitore principale */
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Titolo */
+h1 {
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* Paragrafi ed etichette */
+p {
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #334155;
+}
+
+/* Campi del form */
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 15px;
+    background-color: #f8fafc;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Effetto quando si seleziona un campo */
+input:focus,
+select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+    background-color: white;
+}
+
+/* Pulsante */
+input[type="submit"] {
+    margin-top: 25px;
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    padding: 14px;
+    transition: 0.3s;
+}
+
+/* Hover pulsante */
+input[type="submit"]:hover {
+    background-color: #1e40af;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+    .container {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+}
+
+
+/* Riepilogo prenotazione */
+#riepilogo_prenotazione_verificata {
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#riepilogo_prenotazione_verificata h2 {
+    color: #15803d;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#riepilogo_prenotazione_verificata p {
+    padding: 8px 0;
+    border-bottom: 1px solid #dcfce7;
+    font-weight: normal;
+}
+
+/* Totale */
+#riepilogo_prenotazione_verificata .totale {
+    font-size: 20px;
+    font-weight: bold;
+    color: #15803d;
+    border-bottom: none;
+    margin-top: 10px;
+}
+
+/* Messaggio di errore */
+#avviso_errore_prenotazione {
+    background-color: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#avviso_errore_prenotazione h2 {
+    color: #dc2626;
+    margin-bottom: 15px;
+}
+
+#avviso_errore_prenotazione p {
+    color: #991b1b;
+    font-weight: normal;
+}
+
+/* Link homepage */
+.link-home {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.link-home:hover {
+    background-color: #1e40af;
+}
