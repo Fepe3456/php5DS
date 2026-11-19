@@ -1,5 +1,7 @@
 <?php
 
+session_start(); 
+
 if( $_SERVER["REQUEST_METHOD"] === "POST"  ){
     $nomeCliente = $_POST["nomeCliente"];
     $cognome = $_POST["cognome"];
@@ -28,8 +30,12 @@ $costo_fisso = $progetti[$tipo]["costo_fisso"];
     <title>Preventivo</title>
 </head>
 <body>
+
+    <?php
+    include 'header.php'; 
+    ?>
     
-    <p>Nome: <span><?php echo $nomeCliente; ?> </span></p>
+    <p>Nome: <span><?php echo $_SESSION['login']['nomeCliente']; ?> </span></p>
     <p>Nome progetto: <span><?php echo $nomeProgetto; ?> </span></p>
     <p>Tipologia: <span><?php echo $progetti[$tipo]["tipo"]; ?> </span></p>
     <p>Data inizio: <span><?php echo $dataInizio; ?> </span></p>
@@ -50,6 +56,8 @@ $costo_fisso = $progetti[$tipo]["costo_fisso"];
         $iva = calcolaIva($subtotale);
         echo $iva; ?> </span>€</p>
     <p>Totale preventivo: <span><?php echo calcolaPreventivo($subtotale, $iva); ?> </span>€</p>
+
+    <?php include "footer.php"; ?>
 
 </body>
 </html>

@@ -1,3 +1,26 @@
+<?php
+
+session_start(); //Se non esiste inizializza la sessione, altrimenti acquisisce quella già esistente 
+
+// Inizializza l'array del login in sessione
+if (!isset($_SESSION['login'])) {
+    $_SESSION['login'] = [];
+}
+
+function eliminaSessione(){
+    session_unset();
+    session_destroy(); 
+};
+
+
+    if( $_SERVER["REQUEST_METHOD"] === "GET"  ){
+        $nomeClienteLogin = $_GET["nomeClienteLogin"];
+    }
+
+    $_SESSION['login']['nomeCliente'] = $nomeClienteLogin; 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +33,8 @@
     <?php include "header.php"; ?>
 
     <form action="preventivo.php" method="POST" onsubmit="return check()">
-        <label for="">Nome: </label>
-        <input type="text" name="nomeCliente" id="nomeCliente" required>
+        <label for="">Nome: <?php echo $nomeClienteLogin; ?> </label>
+        <!-- <input type="text" name="nomeCliente" id="nomeCliente" required> -->
         
         <br><label for="">Cognome: </label>
         <input type="text" name="cognome" id="cognome" required>
@@ -47,6 +70,17 @@
 
         <br><input type="submit" value="Ottieni un preventivo" name="button_submit" required>
     </form>
+
+    <?php include "footer.php"; ?>
+
+    <?php
+        $_SESSION["login"][] = [
+            "nomeCliente" => $corrette,
+            "errate" => $errate,
+            "percentuale" => $percentuale,
+            "giudizio" => $giudizio
+        ];
+    ?>
 
     <script>
         function check(){
