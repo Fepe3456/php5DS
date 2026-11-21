@@ -14,10 +14,8 @@ function eliminaSessione(){
 
 
     if( $_SERVER["REQUEST_METHOD"] === "GET"  ){
-        $nomeClienteLogin = $_GET["nomeClienteLogin"];
+        $_SESSION['login']['nomeCliente'] = $_GET["nomeClienteLogin"];
     }
-
-    $_SESSION['login']['nomeCliente'] = $nomeClienteLogin; 
 
 ?>
 
@@ -27,49 +25,77 @@ function eliminaSessione(){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preventivo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
     <?php include "header.php"; ?>
 
-    <form action="preventivo.php" method="POST" onsubmit="return check()">
-        <label for="">Nome: <?php echo $nomeClienteLogin; ?> </label>
-        <!-- <input type="text" name="nomeCliente" id="nomeCliente" required> -->
-        
-        <br><label for="">Cognome: </label>
-        <input type="text" name="cognome" id="cognome" required>
-        
-        <br><label for="">Nome progetto: </label>
-        <input type="text" name="nomeProgetto" id="nomeProgetto" required>
-        
-        <br><select name="tipo" id="tipo" required>
-            <?php
-                require_once "progetti.php";
+    <div class="container">
 
-                foreach($progetti as $chiave => $progetto){
-                    echo "<option value=\"{$chiave}\">{$progetto['tipo']}</option>";                
-                }
-            ?>
-        </select>
-        <br><label for="">Data Inizio: </label>
-        <input type="date" name="dataInizio" id="dataInizio" required>
-        
-        <br><label for="">Ori di sviluppo: </label>
-        <input type="number" name="oreSviluppo" id="oreSviluppo" required>
-        
-        <br><label for="">Numero sviluppatori: </label>
-        <input type="number" name="sviluppatori" id="sviluppatori" required>
-        
-        <br><label for="">Anni manutenzione: </label>
-        <input type="number" name="manutenzione" id="manutenzione" required>
+        <form action="preventivo.php" method="POST" onsubmit="return check()">
+            <div class="form-group">
+                <label for="">Nome cliente: </label>
+                <?php echo "<span>" . $_SESSION['login']['nomeCliente'] . "</span>"; ?>
+                <!-- <input type="text" name="nomeCliente" id="nomeCliente" required> -->
+            </div>
 
-        <br><select name="priorita" id="priorita">
-            <option value="0">Normale</option>
-            <option value="1">Urgente</option>
-        </select>
+            <div class="form-group">
+                <label for="">Cognome: </label>
+                <input type="text" name="cognome" id="cognome" required>
+            </div>
 
-        <br><input type="submit" value="Ottieni un preventivo" name="button_submit" required>
-    </form>
+            <div class="form-group">
+                <label for="">Nome progetto: </label>
+                <input type="text" name="nomeProgetto" id="nomeProgetto" required>
+            </div>
+
+            <div class="form-group">
+                <label for="">Tipologia: </label>
+                <select name="tipo" id="tipo" required>
+                    <?php
+                        require_once "progetti.php";
+
+                        foreach($progetti as $chiave => $progetto){
+                            echo "<option value=\"{$chiave}\">{$progetto['tipo']}</option>";                
+                        }
+                    ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="">Data Inizio: </label>
+                <input type="date" name="dataInizio" id="dataInizio" required>
+            </div>
+
+            <div class="form-group">
+                <label for="">Ori di sviluppo: </label>
+                <input type="number" name="oreSviluppo" id="oreSviluppo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="">Numero sviluppatori: </label>
+                <input type="number" name="sviluppatori" id="sviluppatori" required>
+            </div>
+
+            <div class="form-group">
+                <label for="">Anni manutenzione: </label>
+                <input type="number" name="manutenzione" id="manutenzione" required>
+            </div>
+
+            <div class="form-group">
+                <label for="">Priorità: </label>
+                <select name="priorita" id="priorita">
+                    <option value="0">Normale</option>
+                    <option value="1">Urgente</option>
+                </select>
+            </div>
+            
+            <input type="submit" value="Ottieni un preventivo" name="button_submit" required>
+
+        </form>
+
+    </div>
 
     <?php include "footer.php"; ?>
 

@@ -12,6 +12,8 @@ if( $_SERVER["REQUEST_METHOD"] === "POST"  ){
     $sviluppatori = $_POST["sviluppatori"];
     $manutenzione = $_POST["manutenzione"];
     $priorita = $_POST["priorita"];
+
+    $_SESSION['login']['nomeProgetto'] = $nomeProgetto; 
 };
 
 require_once "funzioni.php"; 
@@ -28,34 +30,39 @@ $costo_fisso = $progetti[$tipo]["costo_fisso"];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preventivo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <?php
     include 'header.php'; 
     ?>
+
+    <div class="container">
     
-    <p>Nome: <span><?php echo $_SESSION['login']['nomeCliente']; ?> </span></p>
-    <p>Nome progetto: <span><?php echo $nomeProgetto; ?> </span></p>
-    <p>Tipologia: <span><?php echo $progetti[$tipo]["tipo"]; ?> </span></p>
-    <p>Data inizio: <span><?php echo $dataInizio; ?> </span></p>
-    <p>Numero sviluppatori: <span><?php echo $sviluppatori; ?> </span></p>
-    <p>Ore complessive: <span><?php echo $oreSviluppo; ?> </span>h</p>
-    <p>Durata in giorni: <span><?php echo durataStimata($oreSviluppo, $sviluppatori); ?> </span>gg</p>
-    <p>Tariffa oraria: <span><?php echo $tariffa_oraria; ?></span>h</p>
-    <p>Costo di sviluppo: <span>
-        <?php echo costoSviluppo($tariffa_oraria, $oreSviluppo, $costo_fisso); ?> 
-    </span>€</p>
-    <p>Costo fisso: <span><?php echo $costo_fisso; ?> </span>€</p>
-    <p>Costi di manutenzione: <span><?php echo calcolaCostiAggiuntivi($manutenzione); ?> </span>€</p>
-    <p>Priorità: <span><?php echo $priorita; ?> </span></p>
-    <p>Subtotale: <span><?php 
-        $subtotale = calcolaSubtotale($costo_fisso, $tariffa_oraria, $sviluppatori, $oreSviluppo, $priorita); 
-        echo $subtotale; ?> </span>€</p>
-    <p>Iva: <span><?php 
-        $iva = calcolaIva($subtotale);
-        echo $iva; ?> </span>€</p>
-    <p>Totale preventivo: <span><?php echo calcolaPreventivo($subtotale, $iva); ?> </span>€</p>
+        <p>Nome: <span><?php echo $_SESSION['login']['nomeCliente']; ?> </span></p>
+        <p>Nome progetto: <span><?php echo $nomeProgetto; ?> </span></p>
+        <p>Tipologia: <span><?php echo $progetti[$tipo]["tipo"]; ?> </span></p>
+        <p>Data inizio: <span><?php echo $dataInizio; ?> </span></p>
+        <p>Numero sviluppatori: <span><?php echo $sviluppatori; ?> </span></p>
+        <p>Ore complessive: <span><?php echo $oreSviluppo; ?> </span>h</p>
+        <p>Durata in giorni: <span><?php echo durataStimata($oreSviluppo, $sviluppatori); ?> </span>gg</p>
+        <p>Tariffa oraria: <span><?php echo $tariffa_oraria; ?></span>h</p>
+        <p>Costo di sviluppo: <span>
+            <?php echo costoSviluppo($tariffa_oraria, $oreSviluppo, $costo_fisso); ?> 
+        </span>€</p>
+        <p>Costo fisso: <span><?php echo $costo_fisso; ?> </span>€</p>
+        <p>Costi di manutenzione: <span><?php echo calcolaCostiAggiuntivi($manutenzione); ?> </span>€</p>
+        <p>Priorità: <span><?php echo $priorita; ?> </span></p>
+        <p>Subtotale: <span><?php 
+            $subtotale = calcolaSubtotale($costo_fisso, $tariffa_oraria, $sviluppatori, $oreSviluppo, $priorita); 
+            echo $subtotale; ?> </span>€</p>
+        <p>Iva: <span><?php 
+            $iva = calcolaIva($subtotale);
+            echo $iva; ?> </span>€</p>
+        <p>Totale preventivo: <span><?php echo calcolaPreventivo($subtotale, $iva); ?> </span>€</p>
+
+    </div>
 
     <?php include "footer.php"; ?>
 
